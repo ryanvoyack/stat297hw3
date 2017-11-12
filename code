@@ -1,0 +1,46 @@
+homework 3 question 2, GPS and satellites
+
+# assumed: 
+#  i = 3 
+#  two-dimensional position for (each of) i-th satellites
+#  t^(i) sub e is time at which signal is emitted. assumed to be "perfect"
+#  t^(i) sub r is time at which signal is received. 
+#    This isnt perfect and is estimated by t^(i) hat sub r
+#    t^(i) hat sub r = t^(i) sub r + delta t
+#    delta t is the same for all i and thus doesnt depend on i
+#  (xi, yi) is the i-th satillites position, where i = 0 is our position
+#  epsilon is the same for all i
+# given:
+#   distances, di hat values
+
+
+di = sqrt((pos[i,x]-x0)**2 + (pos[i,y]-yo)**2)
+# di = di hat - epsilon = di hat - c * delta t
+
+x0=0
+y0=0
+e=0
+theta = c(x0, y0, e) 
+
+d_hat=c(453.2136, 288.8427, 418.3106)
+X = matrix()
+
+
+
+#fun = argmin ||(X[1,i]-theta[1])**2 + (X[2,i]-theta[2])**2 - (d_hat[i]-theta[3])**2||^2
+#fun =argmin (X[1,i]-theta[1])**2 + (X[2,i]-theta[2])**2 - (d_hat[i]-theta[3])**2
+#fun = argmin[ (t(X[1,])%*%X[1,] + t(theta[1])%*%theta[1] - 2t(theta[1])%*%t(X[1,])) + (t(X[2,])%*%X[2,] + t(theta[2])%*%theta[2] - 2t(theta[2])%*%t(X[2,])) - (t(d_hat)%*%d_hat + t(theta[3])%*%theta[3] - 2t(theta[3])%*%t(d_hat))
+#fun = gradient respect to theta = [  4 + 2t(theta[1])%*%t(X[1,]) + 2t(theta[2])%*%t(X[2,]) - 2t(theta[3])%*%t(dhat)]
+#fun = 4 + theta%*%X   (?, i figured this is by definition of matrix multiplication)
+
+#fun = 4 + 2*t(theta[1])%*%t(X[1,]) + 2*t(theta[2])%*%t(X[2,]) - 2*t(theta[3])%*%t(dhat)
+#or, because i dont know matrix calculus
+#fun = c(2*t(theta[1])%*%t(X[1,]), 2*t(theta[2])%*%t(X[2,]), 2*t(theta[3])%*%t(dhat)) # = 0
+#thus 
+#fun(theta) = c(2*t(theta[1])%*%t(X[1,]), 2*t(theta[2])%*%t(X[2,]), 2*t(theta[3])%*%t(dhat)) 
+# gives a theta_hat such that the expression is a zero vector
+theta_hat <- c(2*t(theta[1])%*%t(X[1,]), 2*t(theta[2])%*%t(X[2,]), 2*t(theta[3])%*%t(dhat)) 
+#or,
+theta_hat[1] 
+
+#right now this isnt ready to test
