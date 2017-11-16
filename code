@@ -23,7 +23,7 @@ e=0
 theta = c(x0, y0, e) 
 
 d_hat=c(453.2136, 288.8427, 418.3106)
-X = matrix()
+X = matrix(c(-300, 300, 300, 300, 0, -300), nrow = 3, byrow = TRUE)
 
 
 
