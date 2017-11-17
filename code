@@ -148,9 +148,9 @@ find_pi = function(B = 5000, seed = 10, make_plot = TRUE){
   
  inside = function(mat){
    if (mat[,1]^2 +mat[,2]^2 <=1){
-     TRUE
+     return(1)
    }else{
-     FALSE
+     return(0)
    }
  }
   
